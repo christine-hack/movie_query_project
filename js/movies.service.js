@@ -1,10 +1,12 @@
 function MoviesService($http) {
 
-    var api = '//www.omdbapi.com/?i=tt3896198&apikey=ce98a36c&';
+    var searchApi = '//api.themoviedb.org/3/search/movie?api_key=ae522e81cd433e6b31e34f7dac1122ef&query=';
+    var api = '//api.themoviedb.org/3/discover/movie?api_key=ae522e81cd433e6b31e34f7dac1122ef&sort_by=popularity.desc&include_adult=false&primary_release_year=';
 
     function create() { };
-    function retrieve() {
-        return $http.get(api).then(function (response) {
+    function search() { };
+    function retrieve(year) {
+        return $http.get(api+year).then(function (response) {
             return response;
         });
     };
@@ -13,6 +15,7 @@ function MoviesService($http) {
 
     return {
         create: create,
+        search: search,
         retrieve: retrieve,
         update: update,
         remove: remove

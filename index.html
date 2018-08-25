@@ -1,6 +1,6 @@
 <html ng-app="app">
   <head>
-    <title>My Angular app</title>
+    <title>Movie Query Project</title>
     <script src="js/angular.js"></script>
     <style>
     form {
@@ -10,36 +10,39 @@
       padding: 10px;
     }
     </style>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
   </head>
   <body>
     <div ng-controller="MoviesController as movies">
-      <form ng-submit="movies.addMovie();">
+      <form ng-submit="movies.getMovies(movies.searchYear);">
         <p>
-          Add a movie
+          Search by Year
         </p>
         <input
           type="text"
-          placeholder="Title"
-          ng-change="movies.onChange();"
-          ng-model="movies.newTitle">
-        <input
-          type="text"
-          placeholder="Release year"
-          ng-model="movies.newRelease">
+          placeholder="Year"
+          ng-model="movies.searchYear"
+          ng-change="console.log(movies.searchYear);">
         <button type="submit">
-          Add new movie!
+          Search
         </button>
       </form>
       <ul>
-        <p>{{ movies.favorites.length }}</p>
-        <li ng-repeat="movie in movies.favorites">
-          <p>
-            {{ movie }}
-            {{ movie.t }}
-          </p>
-          <p>Released in: {{ movie.y }}</p>
+        <li ng-repeat="movie in movies.favorites" class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ movie.title }}</h3>
+          </div>
+          <div class="panel-body">
+            <p><strong>Release Date:</strong> {{ movie.release_date }}<span class="pull-right"><strong>Popularity rating:</strong> {{ movie.popularity }}</span></p>
+            <p>{{ movie.overview }}</p>
+          </div>
         </li>
       </ul>
+      <!--<pre>
+        {{ movies.favorites | json }}
+      </pre>-->
     </div>
 
     <script src="js/app.js"></script>

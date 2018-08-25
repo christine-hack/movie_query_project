@@ -1,19 +1,17 @@
 function MoviesController(MoviesService) {
   var ctrl = this;
+  ctrl.searchYear = '';
   ctrl.newTitle = '';
   ctrl.newRelease = '';
   ctrl.favorites = [];
 
-  function getMovies() {
+  ctrl.getMovies = function (year) {
+    console.log(year)
     MoviesService
-      .retrieve()
+      .retrieve(year)
       .then(function (response) {
-        ctrl.favorites = response;
+        ctrl.favorites = response.data.results;
       });
-  }
-
-  ctrl.onChange = function () {
-    console.log('Change!', ctrl.newTitle);
   };
   
   ctrl.addMovie = function () {
@@ -23,7 +21,7 @@ function MoviesController(MoviesService) {
     })
   };
 
-  getMovies();
+  ctrl.getMovies(ctrl.searchYear);
   
 }
 

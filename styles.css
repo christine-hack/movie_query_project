@@ -1,0 +1,25 @@
+ul {
+    padding:0;
+    display:block;
+    width:60%;
+    margin:0 auto;
+}
+li {
+    position:relative;
+    list-style-type:none;
+}
+
+li span {
+    display:block;
+}
+
+li span.pull-right {
+    display:inline-block;
+    position:absolute;
+    top:15;
+    right:15;
+}
+
+li .panel-body {
+    position:relative;
+}
