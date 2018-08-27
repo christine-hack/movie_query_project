@@ -4,9 +4,10 @@ function MoviesController(MoviesService) {
   ctrl.newTitle = '';
   ctrl.newRelease = '';
   ctrl.favorites = [];
+  ctrl.watchlist = [];
+  ctrl.watched = [];
 
   ctrl.getMovies = function (year) {
-    console.log(year)
     MoviesService
       .retrieve(year)
       .then(function (response) {
@@ -20,6 +21,18 @@ function MoviesController(MoviesService) {
       year: ctrl.newRelease
     })
   };
+
+  ctrl.addToWatchlist = function (movie) {
+    ctrl.watchlist.push(movie);
+  }
+
+  ctrl.addToWatched = function (movie) {
+    ctrl.watched.push(movie);
+  }
+
+  ctrl.removeFromWatched = function ($index, movie) {
+    ctrl.watched.splice($index, 1);
+  }
 
   ctrl.getMovies(ctrl.searchYear);
   

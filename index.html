@@ -12,7 +12,7 @@
     </style>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   </head>
   <body>
     <div ng-controller="MoviesController as movies">
@@ -29,20 +29,53 @@
           Search
         </button>
       </form>
-      <ul>
-        <li ng-repeat="movie in movies.favorites" class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">{{ movie.title }}</h3>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul>
+              <li ng-repeat="movie in movies.favorites" class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">{{ movie.title }}</h3>
+                  <span class="pull-right"><a href="" ng-click="movies.addToWatchlist(movie)"><i class="fa fa-plus-circle"></i>Watchlist</a></span>
+                </div>
+                <div class="panel-body">
+                  <p><strong>Release Date:</strong> {{ movie.release_date }}<span class="pull-right"><strong>Popularity rating:</strong> {{ movie.popularity }}</span></p>
+                  <p>{{ movie.overview }}</p>
+                </div>
+              </li>
+            </ul>
           </div>
-          <div class="panel-body">
-            <p><strong>Release Date:</strong> {{ movie.release_date }}<span class="pull-right"><strong>Popularity rating:</strong> {{ movie.popularity }}</span></p>
-            <p>{{ movie.overview }}</p>
+          <div class="col-sm-3">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h2>My Watchlist</h2>
+              </div>
+              <div class="panel-body">
+                <ul class="list">
+                  <li ng-repeat="movie in movies.watchlist">
+                    {{ movie.title }} 
+                    <button class="btn btn-xs pull-right" ng-click="movie.watched = !movie.watched" ng-class="movie.watched ? 'btn-success' : 'btn-default'">Watched</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-        </li>
-      </ul>
-      <!--<pre>
-        {{ movies.favorites | json }}
-      </pre>-->
+          <div class="col-sm-3">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h2>Watched</h2>
+              </div>
+              <div class="panel-body">
+                <ul class="list">
+                  <li ng-repeat="movie in movies.watchlist" ng-if="movie.watched">
+                    {{ movie.title }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="js/app.js"></script>
